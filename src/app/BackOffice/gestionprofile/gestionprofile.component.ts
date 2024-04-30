@@ -60,8 +60,19 @@ export class GestionprofileComponent implements OnInit {
   );;
     }
 
-    aceppter()
-{}
+    acceptUser(userId: any, newStatus: any): void {
+      this.jwtService.acceptUser(userId, newStatus).subscribe(
+        response => {
+          // Traitez la réponse ici si nécessaire
+          console.log('User status updated successfully:', response);
+        },
+        error => {
+          // Gérez l'erreur ici
+          console.error('Error updating user status:', error);
+        }
+      );
+    }
+
 
 
 

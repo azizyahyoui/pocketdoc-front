@@ -12,3 +12,12 @@
     transform: translateY(-50%); /* Ajuster verticalement pour centrer */
     margin-right: 10px; /* Ajouter une marge à droite pour l'espace entre l'image et les liens de navigation */
 }
+.smaller-button {
+    font-size: 15px;
+    padding: 3px 5px;
+    top: 50%;
+    margin-right: 10px;
+    
+    
+  }
+

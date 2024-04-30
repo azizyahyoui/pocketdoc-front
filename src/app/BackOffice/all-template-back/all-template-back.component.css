@@ -9,7 +9,3 @@ body.full-page {
     flex: 1; /* Expand to fill remaining space */
     overflow-y: auto; /* Enable vertical scrolling if needed */
   }
-  .sidebar {
-    position: fixed; /* Fix the sidebar position */
-}
-  

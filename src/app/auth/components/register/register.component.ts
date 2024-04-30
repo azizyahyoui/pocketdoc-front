@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   type: string = "password";
   istext: boolean = false;
   eyeIcon: string = "fa-eye-slash";
+  message: string = ''; 
 
   registerForm!: FormGroup;
 
@@ -55,20 +56,23 @@ export class RegisterComponent implements OnInit {
     this.service.register(this.registerForm.value).subscribe(
       (response) => {
         if (response.statusCode === 200) {
-          alert("Hello " + response.message);
+        console.log('im here')
           const role = this.registerForm.get('role')?.value; // Utilisation de l'opérateur de sécurité de navigation
           if (role === 'DOCTOR') {
             // Redirection vers le composant pour ajouter un diplôme
             this.emailService.setEmail(this.registerForm.get('email')?.value); // Utilisation de l'opérateur de sécurité de navigation et correction de la typo
             this.router.navigate(['/adddiplome']);
+           
           }
+          
         } else {
-          alert("Error: " + response.message);
+          this.message=response.message;
+          this.router.navigate(['/login']);
         }
       },
       (error) => {
         console.error("Error:", error);
-        alert("An error occurred while registering.");
+     
       }
     );
   }

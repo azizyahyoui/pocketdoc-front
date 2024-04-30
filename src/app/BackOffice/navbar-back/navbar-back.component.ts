@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtService } from 'src/app/auth/service/jwt.service';
 
 @Component({
@@ -11,20 +12,20 @@ export class NavbarBackComponent {
     userId: any;
     user:any;
   
-    
-    constructor(private jwtService: JwtService) { }
+    constructor(
+      private jwtService: JwtService,
+      private router: Router,
+
+    ) { }
   
     ngOnInit() {
       this.fetchProfileImage();
-  
     }
   
     fetchProfileImage() {
       // Get the user ID from local storage
-      
       this.userId = localStorage.getItem('id');
   
-    
       // Check if the user ID is available
       if (!this.userId) {
         console.error('User ID not found in local storage');
@@ -32,16 +33,20 @@ export class NavbarBackComponent {
       }
     
       // Call the service method to fetch the user by ID
-      this.jwtService. getUserById(this.userId).subscribe(
+      this.jwtService.getUserById(this.userId).subscribe(
         (response) => {
           console.log('Service response:', response); // Log the response before conversion
           // Assuming the response contains the profile image as a base64 string
           this.user = response.ourUsers;
-  
         },
         (error) => {
           console.error('Error fetching profile image:', error);
         }
       );
-    }}
+    }
   
+    logout() {
+      
+      this.jwtService.logout()
+    }
+}

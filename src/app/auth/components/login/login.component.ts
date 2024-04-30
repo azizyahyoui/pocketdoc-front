@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   istext: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
+  message: string = ''; 
 
   constructor(
     private service: JwtService,
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      
     });
   }
 
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm) { // Vérifie que loginForm est défini
       this.service.login(this.loginForm.value).subscribe(
         (response) => {
+          
           console.log(response);
+          this.message=response.message;
           if (response.token != null) {
             const jwtToken = response.token;
             const ID = response.id
@@ -52,7 +56,8 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
-      console.error("this.loginForm is undefined"); // Gestion de l'erreur
+      console.error("this.loginForm is undefined"); 
+     // Gestion de l'erreur
     }
   }
 

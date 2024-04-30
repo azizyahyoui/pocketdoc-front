@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 const BASE_URL = "http://localhost:8089/auth/";
 
@@ -8,9 +9,12 @@ const BASE_URL = "http://localhost:8089/auth/";
   providedIn: 'root'
 })
 export class JwtService {
+  
+  private userRole!: string;
+  private isAuthenticated: boolean = false;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router: Router,) { }
 
   register(signRequest: any): Observable<any> {
     return this.http.post(BASE_URL + 'signup', signRequest).pipe(
@@ -23,7 +27,27 @@ export class JwtService {
   
 
   login(loginRequest: any): Observable<any> {
-    return this.http.post(BASE_URL + 'signin', loginRequest)
+    return this.http.post<any>(BASE_URL + 'signin', loginRequest)
+      .pipe(
+        tap((response: any) => {
+          // Après une connexion réussie, stockez les informations sur l'utilisateur
+          localStorage.setItem('userRole', response.role);
+          this.userRole = response.role;
+          this.isAuthenticated = true;
+        
+        }),
+        catchError(error => {
+          this.isAuthenticated = false;
+          return throwError(error);
+        })
+      );
+  }
+  getUserRole(): string {
+    return localStorage.getItem('userRole') || '';
+  }
+
+  public  isAuthenticated1(): boolean {
+    return this.isAuthenticated;
   }
   getUserById(userId: number): Observable<any> {
     return this.http.get(BASE_URL + 'users/' + userId, {
@@ -75,7 +99,25 @@ export class JwtService {
   deletuser(userId: any): Observable<any> {
     return this.http.delete<any>(`${BASE_URL}users/${userId}`);
   }
-
+  acceptUser(userId: any, newStatus: any): Observable<any> {
+    // Passer le paramètre newStatus dans l'URL de la requête
+    return this.http.put<any>(`${BASE_URL}${userId}/status?newStatus=${newStatus}`, {});
+  }
+  public logout(): void {
   
+    console.log('Fonction logout() appelée');
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userRole')
+    this.router.navigate(['/login']);
+  }
+  countVerifiedUsers(): Observable<number> {
+    return this.http.get<number>(BASE_URL + 'verified/count');
+  }
+
+  getAgePercentages(): Observable<number[]> {
+    return this.http.get<number[]>(BASE_URL + 'age/percentage');
+  }
 
 }

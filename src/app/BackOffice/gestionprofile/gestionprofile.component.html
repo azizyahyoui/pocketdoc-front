@@ -19,7 +19,7 @@
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
            
 
-            <a *ngIf="!user.status" href="admin/users" class="btn btn-info" style="background-color: green;" (click)="aceppter()">accepter</a>
+            <a *ngIf="!user.status" href="admin/users" class="btn btn-info" style="background-color: green;" (click)="acceptUser(user.id,1)">accepter</a>
             <a href="admin/users" class="btn btn-info" style="background-color: red;" (click)="deleuser()">Delete profile</a>
 
           </div>
@@ -180,6 +180,12 @@
                     <h3 *ngIf="user">{{user.aboutme}}</h3>
                   </div>
                 </div>
+                <label class="form-control-label text-primary" for="input-city">Diplôme :</label>
+                  <div class="pl-lg-4">
+                    <div class="form-group focused">
+                       <img [src]="user.profileImageUrl" *ngIf="user.profileImageUrl" style="width: 600px; height: 250px;">
+                        </div>
+                          </div>
               </form>
             </div>
           </div>

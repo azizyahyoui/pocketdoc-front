@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EmailService } from '../../service/email.service';
 import { JwtService } from '../../service/jwt.service';
 
@@ -12,6 +12,8 @@ import { JwtService } from '../../service/jwt.service';
 export class AdddiplomeComponent {
   email!: string;
   file!: File;
+  fileSelected: boolean = false;
+
 
   constructor(
     // Utilisez le service UserService pour envoyer le fichier
@@ -19,6 +21,7 @@ export class AdddiplomeComponent {
     private router: Router,
     private emailService: EmailService,
     private jwtService: JwtService
+  
   ) { }
 
 
@@ -27,8 +30,9 @@ export class AdddiplomeComponent {
     console.log(this.email);
   }
   onFileSelected(event: any) {
-    this.file = event.target.files[0]; // Access the first file in the FileList
-    console.log('Selected file:', this.file.name);
+    this.file = event.target.files[0];
+    console.log('Selected file:', this.file ? this.file.name : 'No file selected');
+    this.fileSelected = !!this.file;
   }
   
   onSubmit() {
@@ -39,10 +43,17 @@ export class AdddiplomeComponent {
       next: (response) => {
         // Handle server response if necessary
         console.log('Upload response:', response);
+        alert('Votre compte est bien enregistré. Vous devez attendre la validation par l\'administrateur.');
+        this.router.navigate(['/login']);
+
+      
       },
       error: (error) => {
         // Handle error
         console.error('Error during upload:', error);
+        alert('Votre compte est bien enregistré. Vous devez attendre la validation par l\'administrateur.');
+        this.router.navigate(['/login']);
+        // Afficher un message d'erreur à l'utilisateur
       }
     });
   }

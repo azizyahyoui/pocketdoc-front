@@ -14,6 +14,8 @@ export class ResetPasswordComponent {
   eyeIcon: string = "fa-eye-slash";
   type: string = "password";
   istext: boolean = false;
+  message: string = ''; 
+  message2: string = ''; 
 
   constructor(private formBuilder: FormBuilder, 
               private authService: JwtService, 
@@ -28,6 +30,8 @@ export class ResetPasswordComponent {
 
   resetPassword() {
     if (this.resetForm.invalid) {
+     this.message='votre password trop simple ou les 2 motpasse sont deffirent'
+     this.message2=''
       return;
     }
 
@@ -38,10 +42,14 @@ export class ResetPasswordComponent {
       (response) => {
         console.log('Mot de passe réinitialisé avec succès:', response);
         // Gérer les cas de succès ici si nécessaire
-        this.router.navigate(['/login']); // Rediriger vers la page de connexion après la réinitialisation du mot de passe
+        this.router.navigate(['/login']);
+                                 // Rediriger vers la page de connexion après la réinitialisation du mot de passe
       },
       (error) => {
-        console.error('Erreur lors de la réinitialisation du mot de passe:', error);
+        console.log('Erreur lors de la réinitialisation du mot de passe:', error);
+        this.message='invalide code'
+        this.message2=''
+       
         // Gérer les erreurs ici si nécessaire
       }
     );
@@ -59,6 +67,8 @@ export class ResetPasswordComponent {
       this.authService.forgotPassword(email).subscribe(
         (response) => {
           console.log('Email envoyé avec succès:', response);
+          this.message2='code renvoiyee'
+          this.message=''
           // Gérer les cas de succès ici si nécessaire
         },
         (error) => {

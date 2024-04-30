@@ -11,7 +11,8 @@ import { EmailService } from '../../service/email.service';
 })
 export class ResetPasswordEmailComponent {
   resetForm: FormGroup;
-
+  message: string = ''; 
+  message1: string = ''; 
   constructor(private formBuilder: FormBuilder, private authService: JwtService, private router: Router, private emailService: EmailService) {
     this.resetForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
@@ -30,10 +31,12 @@ export class ResetPasswordEmailComponent {
     this.authService.forgotPassword(email).subscribe(
       (response) => {
         console.log('Email envoyé avec succès:', response);
-        this.router.navigate(['/reset-password']); // Naviguer vers reset-password après l'envoi de l'e-mail
+        this.router.navigate(['/reset-password']); 
+        this.message1='email envoiyee avec succee'// Naviguer vers reset-password après l'envoi de l'e-mail
       },
       (error) => {
         console.error('Erreur lors de l\'envoi de l\'e-mail:', error);
+        this.message='erreur ou invalide email'
       }
     );
   }

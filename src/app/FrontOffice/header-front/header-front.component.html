@@ -45,8 +45,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Convention <i class="icofont-thin-down"></i></a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                        <li><a class="dropdown-item" href="department-single.html" >Demande de convention</a></li>
-                       
+                        <li><a class="dropdown-item" href="department-single.html">Demande de convention</a></li>
+                        <li><a class="dropdown-item" href="department-single.html">List de convention</a></li>
                     </ul>
                 </li>
 
@@ -68,15 +68,24 @@
                 <li class="nav-item active">
                     <a class="nav-link" href=home>Reclamation</a>
                 </li>
-
+                
             </ul>
+            
             <div class="profile-image-wrapper">
+                
                 <a href="/profile">
-                    <img src="http://res.cloudinary.com/dwrsbwxkd/image/upload/v1713642041/innpjjgfutnqa20yxp6q.jpg" alt="Photo de profil" class="profile-image">
+                    
+                    <img [src]="user.profileImageUrl1" alt="Photo de profil" class="profile-image">
+                    
                 </a>
             </div>
+           
 
         </div>
     </div>
+    <button class="btn btn-danger smaller-button float-end" style="margin-right: 100px;" (click)="logout()">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <span class="logout-text">Déconnexion</span>
+      </button>
 </nav>
 </header>

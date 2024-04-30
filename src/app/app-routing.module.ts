@@ -14,9 +14,16 @@ import { ProfilComponent } from './FrontOffice/profil/profil.component';
 import { EditprofilComponent } from './FrontOffice/editprofil/editprofil.component';
 import { UsersComponent } from './BackOffice/users/users.component';
 import { GestionprofileComponent } from './BackOffice/gestionprofile/gestionprofile.component';
+import { RoleGuardService } from './auth/service/role-guard.service';
+
+
 
 const routes: Routes = [
   {path:"",component:AllTemplateFrontComponent,
+  canActivate: [RoleGuardService], // Utilisez le garde de routage ici
+  data: {
+    expectedRoles: ['USER', 'DOCTOR'] // Spécifiez le rôle attendu pour accéder à cette route
+  },
   children :[
     { path:"profile",component:ProfilComponent},
     { path :"editProfil", component:  EditprofilComponent}
@@ -25,22 +32,19 @@ const routes: Routes = [
     
 
 {
-      path:"admin",component:AllTemplateBackComponent,
-      children:[
-        { path:"event",component:ListEventComponent},
-        { path:"profil",component:ProfileComponent},
-        { path:"profil",component:ProfileComponent},
-        { path :"editProfile", component:  EditprofileComponent},
-        { path :"users", component:  UsersComponent},
-        { path :"gestionprofile/:id", component:  GestionprofileComponent},
-
-
-         
-
-      ]
-    }
-
-    ,
+  path: "admin", component: AllTemplateBackComponent,
+  canActivate: [RoleGuardService], // Utilisez le garde de routage ici
+  data: {
+    expectedRoles: ['ADMIN']// Spécifiez le rôle attendu pour accéder à cette route
+  },
+  children: [
+    { path: "event", component: ListEventComponent },
+    { path: "profil", component: ProfileComponent },
+    { path: "editProfile", component: EditprofileComponent },
+    { path: "users", component: UsersComponent },
+    { path: "gestionprofile/:id", component: GestionprofileComponent }
+  ]
+},
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path :"reset-password", component:  ResetPasswordComponent},

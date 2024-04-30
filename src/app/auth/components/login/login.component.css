@@ -1,7 +1,7 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 .outer {
-    height: 100vh;
+    height: 120vh;
     background: linear-gradient(to top, #c9c9ff 50%, #6e6ef6 90%) no-repeat;
 }
 

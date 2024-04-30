@@ -15,7 +15,7 @@ import { RegisterComponent } from './auth/components/register/register.component
 import { ResetPasswordComponent } from './auth/components/reset-password/reset-password.component';
 import { ResetPasswordEmailComponent } from './auth/components/reset-password-email/reset-password-email.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdddiplomeComponent } from './auth/components/adddiplome/adddiplome.component';
 import { ProfileComponent } from './BackOffice/profile/profile.component';
 import { EditprofileComponent } from './BackOffice/editprofile/editprofile.component';
@@ -50,7 +50,8 @@ import { GestionprofileComponent } from './BackOffice/gestionprofile/gestionprof
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule ,
 
   ],
   providers: [
