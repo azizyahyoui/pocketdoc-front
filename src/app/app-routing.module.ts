@@ -15,6 +15,12 @@ import { EditprofilComponent } from './FrontOffice/editprofil/editprofil.compone
 import { UsersComponent } from './BackOffice/users/users.component';
 import { GestionprofileComponent } from './BackOffice/gestionprofile/gestionprofile.component';
 import { RoleGuardService } from './auth/service/role-guard.service';
+import { CalenderComponent } from './rdv/calender/calender.component';
+import { ConsultationsStatsComponent} from './rdv/consultations-stats/consultations-stats.component';
+import { ListDoctorComponent } from './rdv/list-doctor/list-doctor.component';
+import { CalenderDoctorComponent } from './rdv/calender-doctor/calender-doctor.component';
+
+
 
 
 
@@ -27,6 +33,7 @@ const routes: Routes = [
   children :[
     { path:"profile",component:ProfilComponent},
     { path :"editProfil", component:  EditprofilComponent}
+    
   ]
 },
     
@@ -43,6 +50,7 @@ const routes: Routes = [
     { path: "editProfile", component: EditprofileComponent },
     { path: "users", component: UsersComponent },
     { path: "gestionprofile/:id", component: GestionprofileComponent }
+   
   ]
 },
   { path: "register", component: RegisterComponent },
@@ -50,6 +58,11 @@ const routes: Routes = [
   { path :"reset-password", component:  ResetPasswordComponent},
   { path :"reset-password-email", component:  ResetPasswordEmailComponent},
   { path :"adddiplome", component:  AdddiplomeComponent},
+  {path:"calender/:id",component: CalenderComponent},
+    
+  {path:"list", component:ListDoctorComponent},
+  {path:"calenderdoc", component:CalenderDoctorComponent},
+  {path:"stat", component:ConsultationsStatsComponent}
   ]
 
 

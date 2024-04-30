@@ -23,10 +23,25 @@ import { ProfilComponent } from './FrontOffice/profil/profil.component';
 import { EditprofilComponent } from './FrontOffice/editprofil/editprofil.component';
 import { UsersComponent } from './BackOffice/users/users.component';
 import { GestionprofileComponent } from './BackOffice/gestionprofile/gestionprofile.component';
+import { CalenderComponent } from './rdv/calender/calender.component';
+import { ListDoctorComponent } from './rdv/list-doctor/list-doctor.component';
+import { CalenderDoctorComponent } from './rdv/calender-doctor/calender-doctor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConsultationsStatsComponent } from './rdv/consultations-stats/consultations-stats.component';
+import {MatCardModule} from '@angular/material/card';
+import { FullCalendarModule } from '@fullcalendar/angular'; // Importez le module FullCalendar
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    CalenderComponent,
+    ListDoctorComponent,
+    CalenderDoctorComponent,
+    
+    ConsultationsStatsComponent,
     AllTemplateFrontComponent,
     HeaderFrontComponent,
     FooterFrontComponent,
@@ -51,7 +66,10 @@ import { GestionprofileComponent } from './BackOffice/gestionprofile/gestionprof
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     FormsModule ,
+    MatPaginatorModule,
+    MatCardModule,FullCalendarModule
 
   ],
   providers: [
