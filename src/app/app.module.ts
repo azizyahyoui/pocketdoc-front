@@ -32,6 +32,23 @@ import {MatCardModule} from '@angular/material/card';
 import { FullCalendarModule } from '@fullcalendar/angular'; // Importez le module FullCalendar
 
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ListInscriByuserComponent } from './FrontOffice/Event/list-inscri-byuser/list-inscri-byuser.component';
+import { ListEventFrontComponent } from './FrontOffice/Event/list-event-front/list-event-front.component';
+import { MapViewComponent } from './FrontOffice/Event/map-view/map-view.component';
+import { AddEventComponent } from './BackOffice/Event/add-event/add-event.component';
+import { ListEventBackComponent } from './BackOffice/Event/list-event-back/list-event-back.component';
+import { ModEventComponent } from './BackOffice/Event/mod-event/mod-event.component';
+import { StatEventComponent } from './BackOffice/Event/stat-event/stat-event.component';
+
 
 
 @NgModule({
@@ -59,7 +76,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ProfilComponent,
     EditprofilComponent,
     UsersComponent,
-    GestionprofileComponent
+    GestionprofileComponent,
+    ListInscriByuserComponent,
+    ListEventFrontComponent,
+    MapViewComponent,
+    AddEventComponent,
+    ListEventBackComponent,
+    ModEventComponent,
+    StatEventComponent
+
   ],
   imports: [
     BrowserModule,
@@ -69,7 +94,18 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     BrowserAnimationsModule,
     FormsModule ,
     MatPaginatorModule,
-    MatCardModule,FullCalendarModule
+    MatCardModule,FullCalendarModule,
+    NgbModule,
+    NgbPaginationModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
 
   ],
   providers: [

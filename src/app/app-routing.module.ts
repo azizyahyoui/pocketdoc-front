@@ -19,6 +19,12 @@ import { CalenderComponent } from './rdv/calender/calender.component';
 import { ConsultationsStatsComponent} from './rdv/consultations-stats/consultations-stats.component';
 import { ListDoctorComponent } from './rdv/list-doctor/list-doctor.component';
 import { CalenderDoctorComponent } from './rdv/calender-doctor/calender-doctor.component';
+import { ListEventFrontComponent } from './FrontOffice/Event/list-event-front/list-event-front.component';
+import { ListInscriByuserComponent } from './FrontOffice/Event/list-inscri-byuser/list-inscri-byuser.component';
+import { AddEventComponent } from './BackOffice/Event/add-event/add-event.component';
+import { ModEventComponent } from './BackOffice/Event/mod-event/mod-event.component';
+import { ListEventBackComponent } from './BackOffice/Event/list-event-back/list-event-back.component';
+import { StatEventComponent } from './BackOffice/Event/stat-event/stat-event.component';
 
 
 
@@ -32,7 +38,10 @@ const routes: Routes = [
   },
   children :[
     { path:"profile",component:ProfilComponent},
-    { path :"editProfil", component:  EditprofilComponent}
+    { path :"editProfil", component:  EditprofilComponent},
+
+    { path :"events", component:ListEventFrontComponent},
+    { path :"listInscri",component:ListInscriByuserComponent}
     
   ]
 },
@@ -49,8 +58,12 @@ const routes: Routes = [
     { path: "profil", component: ProfileComponent },
     { path: "editProfile", component: EditprofileComponent },
     { path: "users", component: UsersComponent },
-    { path: "gestionprofile/:id", component: GestionprofileComponent }
-   
+    { path: "gestionprofile/:id", component: GestionprofileComponent },
+    
+    { path:"ajouter",component:AddEventComponent},
+    { path:"modif/:id",component:ModEventComponent},
+    { path:"listEvent",component:ListEventBackComponent},
+    { path:"stat",component:StatEventComponent}
   ]
 },
   { path: "register", component: RegisterComponent },
@@ -62,7 +75,8 @@ const routes: Routes = [
     
   {path:"list", component:ListDoctorComponent},
   {path:"calenderdoc", component:CalenderDoctorComponent},
-  {path:"stat", component:ConsultationsStatsComponent}
+  {path:"stat", component:ConsultationsStatsComponent},
+
   ]
 
 
