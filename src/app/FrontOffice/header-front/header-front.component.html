@@ -37,9 +37,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rendez-vous <i class="icofont-thin-down"></i></a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                        <li><a class="dropdown-item" href="department.html">Créer Rendez-vous</a></li>
-                        <li><a class="dropdown-item" href="department-single.html">List</a></li>
-                    </ul>
+                        <li *ngIf="userRole === 'USER'">
+                            <a class="dropdown-item" href="/list">Create an appointment</a>
+                        </li>
+                        <li *ngIf="userRole === 'DOCTOR'">
+                            <a class="dropdown-item" href="/calenderdoc">List of appointment</a>
+                        </li>      </ul>
                 </li>
 
                 <li class="nav-item dropdown">

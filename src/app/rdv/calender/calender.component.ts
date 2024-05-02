@@ -98,35 +98,39 @@ date : any;
   }
   
   ajouterRendezVous() {
-    const idPatientConstant = 1; // Remplacez "votre_id_patient" par l'ID du patient fixe
+    const id = localStorage.getItem('id');// Remplacez "votre_id_patient" par l'ID du patient fixe
    //const idPatientConstant = localStorage.getItem('Id');
     const formattedDate = new Date(this.date).toISOString().slice(0, 16);
 
     let idDoctor = this.activatedRoute.snapshot.params['id'];
     const rendezVous = {
       date:formattedDate ,// Date sélectionnée à partir du calendrier
-      patient: { id: idPatientConstant }, // ID du patient fixe
+      patient: { id: id }, // ID du patient fixe
       doctor: { id: idDoctor } // ID du médecin sélectionné
      
     };
 
     this.http.post<any>('http://localhost:8089/rendezVous/add-rendezvous', rendezVous).subscribe(
-      (data) => { if (data.status===500){ Swal.fire({
-        position: "top-end",
-        title: 'opps ..',
-        text: 'Doctor is reserved.',
-        icon: 'error'
-      });}
-        else if (data.status === 200) {
+      (data) => { 
+        if (data) {
           console.log('Rendez-vous ajouté avec succès.');
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Rendez-vous ajouté avec succès",
-            
-          
+            title: "Rendez-vous ajouté avec succès"
           });
         }
+      },
+      (error) => {
+        console.error('Erreur lors de la requête HTTP :', error);
+        Swal.fire({
+          position: "top-end",
+          title: 'opps ..',
+          text: error.message || 'Erreur inattendue lors de l\'envoi de la requête au serveur',
+          icon: 'error'
+        });
+    
+        
         
       },
      /* (error) => {

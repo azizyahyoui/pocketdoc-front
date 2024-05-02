@@ -41,7 +41,12 @@ const routes: Routes = [
     { path :"editProfil", component:  EditprofilComponent},
 
     { path :"events", component:ListEventFrontComponent},
-    { path :"listInscri",component:ListInscriByuserComponent}
+    { path :"listInscri",component:ListInscriByuserComponent},
+    {path:"calender/:id",component: CalenderComponent},
+    
+  {path:"list", component:ListDoctorComponent},
+  {path:"calenderdoc", component:CalenderDoctorComponent}
+ 
     
   ]
 },
@@ -63,7 +68,8 @@ const routes: Routes = [
     { path:"ajouter",component:AddEventComponent},
     { path:"modif/:id",component:ModEventComponent},
     { path:"listEvent",component:ListEventBackComponent},
-    { path:"stat",component:StatEventComponent}
+    { path:"stat",component:StatEventComponent},
+    {path:"stat", component:ConsultationsStatsComponent}
   ]
 },
   { path: "register", component: RegisterComponent },

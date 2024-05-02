@@ -10,7 +10,7 @@ export class HeaderFrontComponent {
     profileImage: string | undefined;
     userId: any;
     user:any;
-  
+    userRole = localStorage.getItem('userRole');
     
     constructor(private jwtService: JwtService) { }
   
