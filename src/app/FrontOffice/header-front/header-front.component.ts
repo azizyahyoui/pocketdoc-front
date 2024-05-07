@@ -10,6 +10,7 @@ export class HeaderFrontComponent {
     profileImage: string | undefined;
     userId: any;
     user:any;
+    userRole!: string;
   
     
     constructor(private jwtService: JwtService) { }
@@ -22,8 +23,14 @@ export class HeaderFrontComponent {
     fetchProfileImage() {
       // Get the user ID from local storage
       
-      this.userId = localStorage.getItem('id');
-  
+      this.userId = this.jwtService.getUserId();
+      
+      const userRole = this.jwtService.getUserRole();
+      if (userRole !== null) {
+        this.userRole = userRole;
+      } else {
+        // Gérer le cas où getUserRole() retourne null
+      }
     
       // Check if the user ID is available
       if (!this.userId) {

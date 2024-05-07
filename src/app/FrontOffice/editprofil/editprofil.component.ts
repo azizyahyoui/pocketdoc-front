@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtService } from 'src/app/auth/service/jwt.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class EditprofilComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private router: Router
   ) {
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -32,7 +34,7 @@ export class EditprofilComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = localStorage.getItem('id');
+    this.userId = this.jwtService.getUserId();
     if (!this.userId) {
       console.error('User ID not found in local storage');
       return;
@@ -89,7 +91,7 @@ export class EditprofilComponent implements OnInit {
   
     this.jwtService.updateUser(this.userId, userData).subscribe(
       (response) => {
-        console.log('User updated successfully:', response);
+        this.router.navigate(['/profile']);
         // Redirigez vers une autre route après avoir enregistré si nécessaire
         // this.router.navigate(['/profile']);
       },

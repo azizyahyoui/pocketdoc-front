@@ -1,32 +1,9 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-<body>
+
   <div class="main-content">
     <!-- Top navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
-        <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="https://www.creative-tim.com/product/argon-dashboard" target="_blank" *ngIf="user">{{user.role}} profile</a>
-        <!-- Form -->
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" *ngIf="user" [src]="user.profileImageUrl1 " class="rounded-circle">
-
-                </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold " *ngIf="user">{{user.name}}</span>
-                </div>
-              </div>
-            </a>
-
-          </li>
-        </ul>
-      </div>
-    </nav>
+    
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url({{user.profileImageUrl1}}); background-size: cover; background-position: center top;">
       <!-- Mask -->
@@ -205,4 +182,4 @@
       </div>
     </div>
   </div>
-</body>
+

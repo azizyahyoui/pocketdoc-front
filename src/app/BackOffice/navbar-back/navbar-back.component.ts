@@ -24,7 +24,7 @@ export class NavbarBackComponent {
   
     fetchProfileImage() {
       // Get the user ID from local storage
-      this.userId = localStorage.getItem('id');
+      this.userId = this.jwtService.getUserId();
   
       // Check if the user ID is available
       if (!this.userId) {

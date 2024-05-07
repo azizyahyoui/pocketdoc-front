@@ -27,9 +27,10 @@ export class ProfilComponent implements OnInit{
 
   fetchProfileImage() {
     // Get the user ID from local storage
-    this.userId = localStorage.getItem('id');
-
-    // Check if the user ID is available
+  
+    this.userId = this.jwtService.getUserId();
+   
+   
     if (!this.userId) {
       console.error('User ID not found in local storage');
       return;

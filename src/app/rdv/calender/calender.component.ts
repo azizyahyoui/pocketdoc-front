@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { JwtService } from 'src/app/auth/service/jwt.service';
 
 
 @Component({
@@ -18,8 +19,11 @@ import Swal from 'sweetalert2';
 export class CalenderComponent implements OnInit  {
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Week;
+  id:any;
+  
 date : any;
-  constructor(private http: HttpClient,private activatedRoute: ActivatedRoute) {}
+newFormattedDate:any;
+  constructor(private http: HttpClient,private activatedRoute: ActivatedRoute,private jwtService: JwtService) {}
 
   calendarOptions: CalendarOptions = {
     eventClick: function(info) {
@@ -38,7 +42,7 @@ date : any;
     slotDuration: '00:15:00', // Intervalle de 15 minutes
     weekends: false,
     events: [], eventColor: '#3788d8', // Couleur par défaut pour tous les événements
-    timeZone: 'local',
+    timeZone: 'Africa/Tunis',
     slotLabelFormat: {
       hour: 'numeric',
       minute: '2-digit',
@@ -64,6 +68,7 @@ date : any;
   ngOnInit() {
     // Récupérer les rendez-vous depuis l'API
     this.getRendezVous();
+    console.log(this.jwtService.getUserId());
   }
 
   getRendezVous() {
@@ -98,47 +103,47 @@ date : any;
   }
   
   ajouterRendezVous() {
-    const idPatientConstant = 1; // Remplacez "votre_id_patient" par l'ID du patient fixe
-   //const idPatientConstant = localStorage.getItem('Id');
-    const formattedDate = new Date(this.date).toISOString().slice(0, 16);
+    this.id = this.jwtService.getUserId();
+  // const id = localStorage.getItem('id');
 
-    let idDoctor = this.activatedRoute.snapshot.params['id'];
-    const rendezVous = {
-      date:formattedDate ,// Date sélectionnée à partir du calendrier
-      patient: { id: idPatientConstant }, // ID du patient fixe
-      doctor: { id: idDoctor } // ID du médecin sélectionné
-     
-    };
+   const formattedDate = new Date(this.date).toISOString().slice(0, 16);
+
+   let idDoctor = this.activatedRoute.snapshot.params['id'];
+   const rendezVous = {
+     date:formattedDate ,// Date sélectionnée à partir du calendrier
+     patient: { id: this.id }, // ID du patient fixe
+     doctor: { id: idDoctor } // ID du médecin sélectionné
+    
+   };
 
     this.http.post<any>('http://localhost:8089/rendezVous/add-rendezvous', rendezVous).subscribe(
-      (data) => { if (data.status===500){ Swal.fire({
+     
+      
+    (data) => { 
+      if (data) {
+        console.log('Rendez-vous ajouté avec succès.');
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Rendez-vous ajouté avec succès",
+          customClass: {
+              popup: 'swal2-popup-center'
+          },
+          confirmButtonColor: '#28a745', // Couleur verte pour le bouton "OK"
+          timer: 3000 // Durée d'affichage de l'alerte en millisecondes (ici 3 secondes)
+      });
+      }
+    },
+    (error) => {
+      console.error('Erreur lors de la requête HTTP :', error);
+      Swal.fire({
         position: "top-end",
         title: 'opps ..',
-        text: 'Doctor is reserved.',
+        text: 'Erreur serveur',
         icon: 'error'
-      });}
-        else if (data.status === 200) {
-          console.log('Rendez-vous ajouté avec succès.');
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Rendez-vous ajouté avec succès",
-            
-          
-          });
-        }
-        
-      },
-     /* (error) => {
-        // Using SweetAlert2 to display an error message with custom icon and title
-        Swal.fire({
-          position: "top-end",
-          title: 'opps ..',
-          text: 'Doctor is reserved.',
-          icon: 'error'
-        });
-      }*/
-    );
+      });
+    }
+  );
   
   }
   

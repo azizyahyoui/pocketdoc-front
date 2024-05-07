@@ -32,7 +32,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = localStorage.getItem('id');
+    this.userId = this.jwtService.getUserId();
     if (!this.userId) {
       console.error('User ID not found in local storage');
       return;
